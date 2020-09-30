@@ -1,26 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { AddTodo, Todo, ToggleTodo, Status } from "./types";
+import { Form } from "./components/Form";
+import { ToDoList } from "./components/ToDoList";
 
-function App() {
+const initialTodos: Array<Todo> = [
+  { text: "Walk the dog", completed: true },
+  { text: "Complete App", completed: false },
+];
+
+const App: React.FC = () => {
+  const [todos, setTodos] = useState(initialTodos);
+
+  const toggleTodo: ToggleTodo = (selectedTodo) => {
+    const newTodos = todos.map((todo) => {
+      if (todo === selectedTodo) {
+        return {
+          ...todo,
+          completed: !todo.completed,
+        };
+      }
+      return todo;
+    });
+    setTodos(newTodos);
+  };
+
+  const addTodo: AddTodo = (newTodo) => {
+    newTodo.trim() !== "" &&
+      setTodos([...todos, { text: newTodo, completed: false }]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <React.Fragment>
+      <header>
+        <h1>Todo List</h1>
       </header>
-    </div>
-  );
-}
+      <main>
+        <Form addTodo={addTodo} />
 
+        <div id="incomplete">
+          <h2>Incomplete</h2>
+          <ToDoList
+            sectionId={Status.incomplete}
+            todos={todos}
+            toggleTodo={toggleTodo}
+          />
+        </div>
+
+        <br />
+        <hr />
+        <br />
+
+        <div id="complete">
+          <h2>Completed</h2>
+          <ToDoList
+            sectionId={Status.completed}
+            todos={todos}
+            toggleTodo={toggleTodo}
+          />
+        </div>
+      </main>
+    </React.Fragment>
+  );
+};
 export default App;
