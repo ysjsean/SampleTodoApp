@@ -44,13 +44,35 @@ form button:hover {
 
 #incomplete,
 #complete {
-  margin: auto;
-  text-align: center;
+  /* margin: auto; */
+  /* text-align: center; */
   width: 15rem;
 }
 
 ul {
   text-align: left;
   list-style: none;
-  margin-left: 3rem;
+}
+
+table{
+  margin: auto;
+  width: 50em;
+  border-collapse: collapse;
+}
+
+table tbody tr td ul div{
+  text-align: center;
+}
+
+table td{
+  vertical-align: top;
+}
+
+
+table tr td, table tr th{
+  border-right: 2px solid black;
+}
+
+table tr td:last-of-type, table tr th:last-of-type{
+  border: none;
 }

@@ -37,27 +37,33 @@ const App: React.FC = () => {
       </header>
       <main>
         <Form addTodo={addTodo} />
-
-        <div id="incomplete">
-          <h2>Incomplete</h2>
-          <ToDoList
-            sectionId={Status.incomplete}
-            todos={todos}
-            toggleTodo={toggleTodo}
-          />
-        </div>
-
-        <br />
-        <hr />
-        <br />
-
-        <div id="complete">
-          <h2>Completed</h2>
-          <ToDoList
-            sectionId={Status.completed}
-            todos={todos}
-            toggleTodo={toggleTodo}
-          />
+        <div id="tasks">
+          <table>
+            <thead>
+              <tr>
+                <th><h2>Incomplete</h2></th>
+                <th><h2>Complete</h2></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <ToDoList
+                    sectionId={Status.incomplete}
+                    todos={todos}
+                    toggleTodo={toggleTodo}
+                  />
+                </td>
+                <td>
+                  <ToDoList
+                    sectionId={Status.completed}
+                    todos={todos}
+                    toggleTodo={toggleTodo}
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </main>
     </React.Fragment>
